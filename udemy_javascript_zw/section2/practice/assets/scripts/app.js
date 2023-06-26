@@ -1,6 +1,5 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
-
 let logEntries = [];
 
 //gets input from input field
