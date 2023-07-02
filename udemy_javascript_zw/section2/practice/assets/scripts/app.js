@@ -28,42 +28,31 @@ function writeToLog(
   console.log(logEntries);
 }
 
-function add() {
+function calculate(operation){
   const enteredNumber = getUserNumberInput();
   const initialResult = currentResult;
-  currentResult += enteredNumber;
-  createAndWriteOutput('+', initialResult, enteredNumber);
-  writeToLog('ADD', initialResult, enteredNumber, currentResult);
+  let operator;
+  if(operation === 'ADD') {
+    currentResult += enteredNumber;
+    operator = '+';
+  } else if(operation ==='SUBTRACT'){
+    currentResult -= enteredNumber;
+    operator = '-';
+  } else if(operation === 'MULTIPLY') {
+    currentResult *= enteredNumber;
+    operator = '*';
+  } else {
+    currentResult /= enteredNumber;
+    operator = '/';
+  }
+  createAndWriteOutput(operator, initialResult, enteredNumber);
+  writeToLog(operation, initialResult, enteredNumber, currentResult);
 }
 
-function subtract() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult -= enteredNumber;
-  createAndWriteOutput('-', initialResult, enteredNumber);
-  writeToLog('SUBTRACT', initialResult, enteredNumber, currentResult);
-}
-
-function multiply() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult *= enteredNumber;
-  createAndWriteOutput('*', initialResult, enteredNumber);
-  writeToLog('MULTIPLY', initialResult, enteredNumber, currentResult);
-}
-
-function divide() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult /= enteredNumber;
-  createAndWriteOutput('/', initialResult, enteredNumber);
-  writeToLog('DIVIDE', initialResult, enteredNumber, currentResult);
-}
-
-addBtn.addEventListener('click', add);
-subtractBtn.addEventListener('click', subtract);
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+addBtn.addEventListener('click', calculate.bind(this, 'ADD'));
+subtractBtn.addEventListener('click', calculate.bind(this, 'SUBTRACT'));
+multiplyBtn.addEventListener('click', calculate.bind(this, 'MULTIPLY'));
+divideBtn.addEventListener('click', calculate.bind(this, 'DIVIDE'));
 
 //결과를 보여주는 (화면을 바꿈) -> 이 함수는 처음 스크립트가 실행될때만 실행된다 -> add함수 내부로 옮기면 이벤트가 일어날때 실행됨
 // outputResult(currentResult, '');
